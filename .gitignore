@@ -1,0 +1,9 @@
+build
+gtest
+**/*.a
+**/*.so
+**/.*.swp
+.vscode
+tests/googletest
+
+cmake-build-debug
