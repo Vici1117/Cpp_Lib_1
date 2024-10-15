@@ -1,4 +1,28 @@
 #ifndef EXECUTORLMPL_HPP
 #define EXECUTORLMPL_HPP 1
 
+#include "Executor.hpp"
+#include <string>
+
+namespace adas{
+    class ExecutorImpl:public Executor{
+        public:
+
+        explicit ExecutorImpl(const Pose& Pose) noexcept;
+
+        ~ExecutorImpl() noexcept =default;
+
+        ExecutorImpl(const ExecutorImpl &) =delete;
+
+        ExecutorImpl &operator=(const ExecutorImpl &)=delete;
+
+        public:
+
+        Pose State() const noexcept override;
+
+        private:
+        Pose pose;
+    };
+}
+
 #endif

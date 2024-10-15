@@ -1,18 +1,35 @@
 #include "Executor.hpp"
-
 #include "gtest/gtest.h"
 
-TEST(Func1, Sample1)
-{
-    EXPECT_EQ(5, func1(2, 3));
-}
+#include <tuple>
+#include <memory>
 
-TEST(Func1, Sample2)
+namespace adas
 {
-    EXPECT_EQ(4, func1(2, 2));
-}
+    bool operator==(const Pose &lhs, const Pose &rhs)
+    {
+        return std::tie(lhs.x, lhs.y, lhs.heading) == std::tie(rhs.x, rhs.y, rhs.heading);
+    }
 
-TEST(func1, Sample3)
-{
-    EXPECT_TRUE(4 > func1(1, 2));
+    TEST(ExecutorTest, should_return_init_pose_when_without_command)
+    {
+        // given
+        std::unique_ptr<Executor> executorP(Executor::newExecutor({0, 0, 'E'}));
+        // when
+
+        // then
+        const Pose target({0, 0, 'e'});
+        ASSERT_EQ(target, executorP->State());
+    }
+
+    TEST(ExecutorTest, should_return_default_pose_when_without_init_and_command)
+    {
+        // given
+        std::unique_ptr<Executor> executor(Executor::newExecutor()); 
+        //when
+
+        // then
+        const Pose target({0, 0, 'N'});
+        ASSERT_EQ(target, executor->State());
+    }
 }
