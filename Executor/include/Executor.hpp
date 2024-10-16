@@ -30,6 +30,8 @@ namespace adas
 
     public:
         virtual Pose State() const noexcept = 0;
+
+        virtual void Execute(const std::string &command) noexcept =0;
     };
 }
 

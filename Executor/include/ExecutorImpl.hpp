@@ -20,7 +20,10 @@ namespace adas{
 
         Pose State() const noexcept override;
 
+        void Execute(const std::string &commands) noexcept override;
+
         private:
+
         Pose pose;
     };
 }
