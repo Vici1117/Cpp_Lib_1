@@ -43,6 +43,16 @@ namespace adas
                 else
                     pose.heading='E';
                 break;
+            case 'R':
+                if (pose.heading == 'E')
+                    pose.heading='S';
+                else if (pose.heading == 'W')
+                    pose.heading='N';
+                else if (pose.heading == 'N')
+                    pose.heading='E';
+                else
+                    pose.heading='W';
+                break;
             }
         };
         std::for_each(commands.begin(), commands.end(), eachMove);
