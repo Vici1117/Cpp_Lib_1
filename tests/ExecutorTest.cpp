@@ -164,4 +164,24 @@ namespace adas
         const Pose target({0, 0, 'W'});
         ASSERT_EQ(target, executor->State());
     }
+
+    TEST(MultiMoveTest,N00_RMMR_S20){
+        // given
+        std::unique_ptr<Executor> executor(Executor::newExecutor({0, 0, 'N'}));
+        // when
+        executor->Execute("RMMR");
+        // then
+        const Pose target({2, 0, 'S'});
+        ASSERT_EQ(target, executor->State());
+    }
+
+    TEST(MultiMoveTest,E00_RRLLMMM_30E){
+        // given
+        std::unique_ptr<Executor> executor(Executor::newExecutor({0, 0, 'E'}));
+        // when
+        executor->Execute("RRLLMMM");
+        // then
+        const Pose target({3, 0, 'E'});
+        ASSERT_EQ(target, executor->State());
+    }
 }
