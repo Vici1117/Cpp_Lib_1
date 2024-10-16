@@ -23,7 +23,6 @@ namespace adas
         {
             switch (sig_command)
             {
-            case 'm':
             case 'M':
                 {
                     if(pose.heading=='E')
