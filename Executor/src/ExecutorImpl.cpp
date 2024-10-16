@@ -24,18 +24,27 @@ namespace adas
             switch (sig_command)
             {
             case 'M':
-                {
-                    if(pose.heading=='E')
-                        ++pose.x;
-                    else if(pose.heading=='W')
-                        --pose.x;
-                    else if(pose.heading=='N')
-                        ++pose.y;
-                    else
-                        --pose.y;
-                }
+                if (pose.heading == 'E')
+                    ++pose.x;
+                else if (pose.heading == 'W')
+                    --pose.x;
+                else if (pose.heading == 'N')
+                    ++pose.y;
+                else
+                    --pose.y;
+                break;
+            case 'L':
+                if (pose.heading == 'E')
+                    pose.heading='N';
+                else if (pose.heading == 'W')
+                    pose.heading='S';
+                else if (pose.heading == 'N')
+                    pose.heading='W';
+                else
+                    pose.heading='E';
+                break;
             }
         };
-        std::for_each(commands.begin(), commands.end(),eachMove);
+        std::for_each(commands.begin(), commands.end(), eachMove);
     }
 }
