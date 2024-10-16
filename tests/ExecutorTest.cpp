@@ -18,7 +18,7 @@ namespace adas
         // when
 
         // then
-        const Pose target({0, 0, 'e'});
+        const Pose target({0, 0, 'E'});
         ASSERT_EQ(target, executorP->State());
     }
 

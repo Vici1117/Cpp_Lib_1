@@ -8,4 +8,4 @@ target_include_directories(ExecutorTest PUBLIC ${WorkSpaceFolder}/gtest/googlete
 target_include_directories(ExecutorTest PUBLIC ${WorkSpaceFolder}/Executor/include)
 target_link_libraries(ExecutorTest PUBLIC gtest gtest_main Executor)
 
-add_test(NAME Module1Test COMMAND Module1Test)
+add_test(NAME ExecutorTest COMMAND ExecutorTest)
