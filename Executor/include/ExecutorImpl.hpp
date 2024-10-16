@@ -1,5 +1,5 @@
-#ifndef EXECUTORLMPL_HPP
-#define EXECUTORLMPL_HPP 1
+#ifndef EXECUTORIMPL_HPP
+#define EXECUTORIMPL_HPP 1
 
 #include "Executor.hpp"
 #include <string>
