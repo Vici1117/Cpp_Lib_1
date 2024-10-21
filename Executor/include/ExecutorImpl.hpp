@@ -5,7 +5,7 @@
 #include <string>
 
 namespace adas{
-    class ExecutorImpl:public Executor{
+    class ExecutorImpl final:public Executor{
         public:
 
         explicit ExecutorImpl(const Pose& Pose) noexcept;
@@ -25,13 +25,20 @@ namespace adas{
         private:
 
         Pose pose;
+        
+        class MoveCommand final{
+            public:
+            void DoOperate(ExecutorImpl& executor)const noexcept{
+                executor.Move();
+            }
+        };
 
         void Move() noexcept;
 
         void TurnLeft() noexcept;
 
         void TurnRight() noexcept;
-        
+
     };
 }
 

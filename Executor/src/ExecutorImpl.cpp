@@ -2,6 +2,7 @@
 
 #include <new>
 #include <algorithm>
+#include <memory>
 
 namespace adas
 {
@@ -24,8 +25,11 @@ namespace adas
             switch (sig_command)
             {
             case 'M':
-                Move();
+            {
+                std::unique_ptr<MoveCommand> cmder = std::make_unique<MoveCommand>();
+                cmder->DoOperate(*this);
                 break;
+            }
             case 'L':
                 TurnLeft();
                 break;
