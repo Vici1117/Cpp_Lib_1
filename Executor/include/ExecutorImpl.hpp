@@ -33,6 +33,13 @@ namespace adas{
             }
         };
 
+        class TurnLeftCommand final{
+            public:
+            void DoOperate(ExecutorImpl& executor)const noexcept{
+                executor.TurnLeft();
+            }
+        };
+
         void Move() noexcept;
 
         void TurnLeft() noexcept;
