@@ -27,14 +27,7 @@ namespace adas
                 Move();
                 break;
             case 'L':
-                if (pose.heading == 'E')
-                    pose.heading = 'N';
-                else if (pose.heading == 'W')
-                    pose.heading = 'S';
-                else if (pose.heading == 'N')
-                    pose.heading = 'W';
-                else
-                    pose.heading = 'E';
+                TurnLeft();
                 break;
             case 'R':
                 if (pose.heading == 'E')
@@ -61,5 +54,17 @@ namespace adas
             ++pose.y;
         else
             --pose.y;
+    }
+
+    void ExecutorImpl::TurnLeft() noexcept
+    {
+        if (pose.heading == 'E')
+            pose.heading = 'N';
+        else if (pose.heading == 'W')
+            pose.heading = 'S';
+        else if (pose.heading == 'N')
+            pose.heading = 'W';
+        else
+            pose.heading = 'E';
     }
 }
