@@ -4,45 +4,58 @@
 #include "Executor.hpp"
 #include <string>
 
-namespace adas{
-    class ExecutorImpl final:public Executor{
-        public:
+namespace adas
+{
+    class ExecutorImpl final : public Executor
+    {
+    public:
+        explicit ExecutorImpl(const Pose &Pose) noexcept;
 
-        explicit ExecutorImpl(const Pose& Pose) noexcept;
+        ~ExecutorImpl() noexcept = default;
 
-        ~ExecutorImpl() noexcept =default;
+        ExecutorImpl(const ExecutorImpl &) = delete;
 
-        ExecutorImpl(const ExecutorImpl &) =delete;
+        ExecutorImpl &operator=(const ExecutorImpl &) = delete;
 
-        ExecutorImpl &operator=(const ExecutorImpl &)=delete;
-
-        public:
-
+    public:
         Pose State() const noexcept override;
 
         void Execute(const std::string &commands) noexcept override;
 
-        private:
-
+    private:
         Pose pose;
-        
-        class MoveCommand final{
-            public:
-            void DoOperate(ExecutorImpl& executor)const noexcept{
+
+        class ICommand
+        {
+        public:
+            virtual ~ICommand() = default;
+
+            virtual void DoOperate(ExecutorImpl &executor) const noexcept = 0;
+        };
+
+        class MoveCommand final : public ICommand
+        {
+        public:
+            void DoOperate(ExecutorImpl &executor) const noexcept override
+            {
                 executor.Move();
             }
         };
 
-        class TurnLeftCommand final{
-            public:
-            void DoOperate(ExecutorImpl& executor)const noexcept{
+        class TurnLeftCommand final :public ICommand
+        {
+        public:
+            void DoOperate(ExecutorImpl &executor) const noexcept override
+            {
                 executor.TurnLeft();
             }
         };
 
-        class TurnRightCommand final{
-            public:
-            void DoOperate(ExecutorImpl& executor)const noexcept{
+        class TurnRightCommand final :public ICommand
+        {
+        public:
+            void DoOperate(ExecutorImpl &executor) const noexcept override
+            {
                 executor.TurnRight();
             }
         };
@@ -52,7 +65,6 @@ namespace adas{
         void TurnLeft() noexcept;
 
         void TurnRight() noexcept;
-
     };
 }
 

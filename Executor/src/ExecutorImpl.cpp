@@ -22,27 +22,21 @@ namespace adas
     {
         auto eachMove = [this](const char &sig_command) -> void
         {
+            std::unique_ptr<ICommand> cmder;
             switch (sig_command)
             {
             case 'M':
-            {
-                std::unique_ptr<MoveCommand> cmder = std::make_unique<MoveCommand>();
-                cmder->DoOperate(*this);
+                cmder = std::make_unique<MoveCommand>();
                 break;
-            }
             case 'L':
-            {
-                std::unique_ptr<TurnLeftCommand> cmder = std::make_unique<TurnLeftCommand>();
-                cmder->DoOperate(*this);
+                cmder = std::make_unique<TurnLeftCommand>();
                 break;
-            }
             case 'R':
-            {
-                std::unique_ptr<TurnRightCommand> cmder = std::make_unique<TurnRightCommand>();
-                cmder->DoOperate(*this);
+                cmder = std::make_unique<TurnRightCommand>();
                 break;
             }
-            }
+            if(cmder)
+                cmder->DoOperate(*this);
         };
         std::for_each(commands.begin(), commands.end(), eachMove);
     }
