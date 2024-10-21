@@ -30,6 +30,8 @@ namespace adas{
 
         void TurnLeft() noexcept;
 
+        void TurnRight() noexcept;
+        
     };
 }
 
