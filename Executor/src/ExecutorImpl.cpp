@@ -37,8 +37,11 @@ namespace adas
                 break;
             }
             case 'R':
-                TurnRight();
+            {
+                std::unique_ptr<TurnRightCommand> cmder = std::make_unique<TurnRightCommand>();
+                cmder->DoOperate(*this);
                 break;
+            }
             }
         };
         std::for_each(commands.begin(), commands.end(), eachMove);
