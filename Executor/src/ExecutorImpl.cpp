@@ -34,8 +34,11 @@ namespace adas
             case 'R':
                 cmder = std::make_unique<TurnRightCommand>();
                 break;
+            case 'F':
+                cmder =std::make_unique<FastCommand>();
+                break;
             }
-            if(cmder)
+            if (cmder)
                 cmder->DoOperate(*this);
         };
         std::for_each(commands.begin(), commands.end(), eachMove);
@@ -75,5 +78,15 @@ namespace adas
             pose.heading = 'E';
         else
             pose.heading = 'W';
+    }
+
+    void ExecutorImpl::Fast() noexcept
+    {
+        fast = (fast ? 0 : 1);
+    }
+
+    bool ExecutorImpl::IsFast() const noexcept
+    {
+        return fast;
     }
 }
